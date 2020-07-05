@@ -259,7 +259,7 @@ class Window(QWidget, Ui_Form):
         self.select_xuhao = None
         self.xuhao_last = None
 
-        self.set_main_table(FILEPATH)
+        self.get_df_from_excel(FILEPATH)
         self.main_table.clicked.connect(self.main_table_clicked)
         self.main_table.setSelectionBehavior(QTableWidget.SelectRows)       #整行选择
         self.main_table.setEditTriggers(QTableWidget.NoEditTriggers)        #无法编辑
@@ -277,7 +277,10 @@ class Window(QWidget, Ui_Form):
         # self.checkBox.clicked.connect(self.check_dingqi)
         self.checkBox.stateChanged.connect(self.check_dingqi)
         self.find_btn.setEnabled(False)
-        self.start_btn.setEnabled(False)
+
+        # self.start_btn.setEnabled(True)
+
+
         self.save_btn.clicked.connect(lambda :self.save_dataframe(self.current_dataframe))
         self.del_btn.clicked.connect(self.del_dataframe)
         self.btn_replace.clicked.connect(self.glcs_replace)
@@ -296,8 +299,10 @@ class Window(QWidget, Ui_Form):
         self.endtime.setTime(QTime.fromString('18:00', 'hh:mm'))
         self.Auto = None
 
+        # self.save_btn.setEnabled(False)
+        self.del_btn.setEnabled(True)
         #========编辑状态判断============编辑状态判断===============编辑状态判断===========编辑状态判断====================
-        self.save_btn.setEnabled(False);                self.del_btn.setEnabled(True)
+
         self.youxianji.activated.connect(self.edit_state)
         self.weixiuleixing.activated.connect(self.edit_state)
         self.zhuanye.activated.connect(self.edit_state)
@@ -372,10 +377,8 @@ class Window(QWidget, Ui_Form):
 
     #定期工作切换
     def check_dingqi(self):
-        if self.checkBox.isChecked():
-            self.insert_data(self.current_dataframe_dingqi)
-        else:
-            self.insert_data(self.current_dataframe_weixiu)
+        self.insert_data(self.current_dataframe)
+        self.clear_info()
 
 
     def edit_state(self):
@@ -386,10 +389,11 @@ class Window(QWidget, Ui_Form):
     #搜索按钮点击事件
     def search_btn_clicked(self):
         filtertext = self.filter_text.text()   #搜索的关键字，以空格键隔开
-        # self.current_dataframe = self.filter_dateframe(self.first_dataframe, 'search', filtertext)
         display_dataframe = self.filter_dateframe(self.current_dataframe, 'search', filtertext)
-        self.insert_data(display_dataframe)
 
+
+        self.insert_data(display_dataframe)
+        # self.save_btn.setEnabled(False)
 
     # dateframe数据过滤
     def filter_dateframe(self, dateframe, type, filter_str = ''):
@@ -416,58 +420,79 @@ class Window(QWidget, Ui_Form):
         elif type == 'dingqi-fenli':
             del_list = [] #定期列表
             del_list2 = [] #维修列表
-            for i, item in enumerate(dateframe.itertuples()):
+            for item in dateframe.itertuples():
                 if str(item.维修类型).find('定期工作') > -1:
-                    del_list.append(i)
+                    del_list.append(item[0])
                 else:
-                    del_list2.append(i)
-            # current_df=current_df.reset_index(drop=True)      #重建索引
-            weixiu_df = dateframe.drop(labels=del_list).drop_duplicates(subset='工单号', keep= 'first')   #去掉定期后的data
-            dingqi_df = dateframe.drop(labels=del_list2).drop_duplicates(subset='工单号', keep= 'first')    #去掉维修后的data
+                    del_list2.append(item[0])
+            weixiu_df = dateframe.drop(labels=del_list).drop_duplicates(subset='序号', keep= 'first')   #去掉定期后的data
+            dingqi_df = dateframe.drop(labels=del_list2).drop_duplicates(subset='序号', keep= 'first')    #去掉维修后的data
             return dingqi_df ,weixiu_df
 
 
     def save_dataframe(self,gd_num):
-        #1、读入当前文件SHEET为模板dataframe
-        df_moban = pd.read_excel(FILEPATH, '模板')
-        #2、将current dataframe添加序号列后，追加到模板dataframe
-        df_moban = df_moban.append(self.current_dataframe, ignore_index= True)
-        writer = pd.ExcelWriter(FILEPATH)
-        df_moban.to_excel(excel_writer=writer, sheet_name='模板', index= False)
-        writer.save()
-        writer.close()
+        #判断first_datafram中序号 是否相同
+        # if int(self.select_xuhao) in self.first_dataframe['序号'].values:
+        #     print('exist,不保存！')
+        #     return
+
+        # 用【负责人】判断 是否选中ITEM
+        # print(self.fuzeren.currentText())
+        if self.mvp.text() == '':
+            print('没有选中ITEM')
+        else:
+            aim_dict = {}
+            self.info_to_dict(aim_dict)
+            aim_dict['序号'] = self.xuhao_last + 1
+            # print(aim_dict)
+            mylist = []
+            mylist.append(aim_dict)
+            df = pd.DataFrame(mylist)
+            print(df)
+
+            #1、读入当前文件SHEET为模板dataframe
+            df_moban = pd.read_excel(FILEPATH, '模板')
+            #2、将current dataframe添加序号列后，追加到模板dataframe
+            df_moban = df_moban.append(df, ignore_index= True)
+            self.current_dataframe = df_moban
+            self.insert_data(self.current_dataframe)
+            writer = pd.ExcelWriter(FILEPATH)
+            df_moban.to_excel(excel_writer=writer, sheet_name='模板', index= False)
+            writer.save()
+            writer.close()
+            self.clear_info()
+
 
 
     def del_dataframe(self):  #删除选中data
-        del_list = []
+        if self.mvp.text() == '':
+            print('没有选中ITEM')
+            return
+        else:
 
-        # df = self.current_dataframe[self.current_dataframe['序号'].isin([self.select_xuhao])]
-        # 遍历df找到序号对应的索引
-        for row in self.current_dataframe.itertuples():
-            if self.select_xuhao == str(row[1]).strip():
-                del_list.append(row[0])
-        self.current_dataframe.drop(labels=del_list, inplace=True)
-        writer = pd.ExcelWriter(FILEPATH)
-        self.current_dataframe.to_excel(excel_writer=writer, sheet_name='模板', index=False)
-        writer.save()
-        writer.close()
-        self.set_main_table(FILEPATH, "模板")
+            del_list = []
+            # df = self.current_dataframe[self.current_dataframe['序号'].isin([self.select_xuhao])]
+            # 遍历df找到序号对应的索引
+            for row in self.current_dataframe.itertuples():
+                if self.select_xuhao == str(row[1]).strip():
+                    del_list.append(row[0])
+            self.current_dataframe.drop(labels=del_list, inplace=True)
+            writer = pd.ExcelWriter(FILEPATH)
+            self.current_dataframe.to_excel(excel_writer=writer, sheet_name='模板', index=False)
+            writer.save()
+            writer.close()
+            self.insert_data(self.current_dataframe)
+            self.clear_info()
+
 
     #通过年份，获取主dateframe数据，并插入数据到主TABLE
-    def set_main_table(self, file_path, years='模板'):
-        # 获取SHEET全部data
+    def get_df_from_excel(self, file_path, years='模板'):
         self.first_dataframe = pd.read_excel(file_path)
-        #维修数据、定期数据分离
-        dingqi, weixiu =self.filter_dateframe(self.first_dataframe, type = 'dingqi-fenli')
         self.current_dataframe = self.first_dataframe
-        self.current_dataframe_weixiu = weixiu
-        self.current_dataframe_dingqi = dingqi
-        if self.checkBox.isChecked():
-            self.insert_data(self.current_dataframe_dingqi)
-        else:
-            self.insert_data(self.current_dataframe_weixiu)
         #获取最后一行序号
-        self.xuhao_last = self.first_dataframe.tail(1)['序号'].values[0]
+        self.insert_data(self.current_dataframe)
+        # self.xuhao_last = self.first_dataframe.tail(1)['序号'].values[0]
+        # print('最后序号为{}'.format(self.xuhao_last))
 
 
 
@@ -495,7 +520,15 @@ class Window(QWidget, Ui_Form):
 
     #插入数据到主TABLE
     def insert_data(self, current_df):
-        selected_df = current_df[['序号', '工单号', '负责人', '机组', '工作内容', '维修类型', '隔离单号']]
+        self.xuhao_last = current_df.tail(1)['序号'].values[0]
+        print('最后序号为{}'.format(self.xuhao_last))
+        dingqi, weixiu = self.filter_dateframe(current_df, type='dingqi-fenli')
+        if self.checkBox.isChecked():
+            temp_df = dingqi
+        else:
+            temp_df = weixiu
+        selected_df = temp_df[['序号', '工单号', '负责人', '机组', '工作内容', '维修类型', '隔离单号']]
+        # print(selected_df)
         rows = selected_df.shape[0]
         columns = selected_df.shape[1]
         headers = selected_df.columns.values.tolist()
@@ -521,20 +554,17 @@ class Window(QWidget, Ui_Form):
     #主TABLE点击事件
     def main_table_clicked(self, item):
         if self.is_edit == True:
-            res = QMessageBox.information(None, 'title', '信息已改变，是否离开', QMessageBox.Yes | QMessageBox.No)
-            if res == QMessageBox.No:
-                self.main_table.selectRow(self.selected_index)
-                return
+            if self.select_xuhao != None:
+                res = QMessageBox.information(None, 'title', '信息已改变，是否离开', QMessageBox.Yes | QMessageBox.No)
+                if res == QMessageBox.No:
+                    self.main_table.selectRow(self.selected_index)
+                    return
             self.is_edit = False
 
-        self.selected_index = item.row()
-
-
-        current_row = item.row()
+        self.selected_index = item.row()            #选中行的行数
+        # current_row = item.row()
         currnet_df = self.current_dataframe
-
-
-        self.select_xuhao = self.main_table.item(current_row, 0).text()
+        self.select_xuhao = self.main_table.item(self.selected_index, 0).text()         #获得选中行第0列，即序号
         #通过序号获取DATA
         df = currnet_df[currnet_df['序号'].isin([self.select_xuhao])]
         def f(x):
@@ -542,6 +572,7 @@ class Window(QWidget, Ui_Form):
 
         self.gelidanhao = str(f(df['隔离单号']))
         self.youxianji.setCurrentText(f(df['优先级']))
+        print(f(df['维修类型']))
         self.weixiuleixing.setCurrentText(f(df['维修类型']))
         self.mvp.setText(f(df['负责人']))
         self.jizu.setCurrentText(f(df['机组']))
@@ -562,36 +593,70 @@ class Window(QWidget, Ui_Form):
         self.insert_glcs_data(glcs)
         self.insert_ykcs_data(ykcs)
 
+
+    def info_to_dict(self, out_dict):
+        str_glcs = self.get_glcs_data()
+        str_ykcs = self.get_ykcs_data()
+        # out_dict = {}
+        out_dict['序号'] =self.select_xuhao
+        out_dict['工单号'] = self.select_xuhao
+        out_dict['隔离单号'] = self.gelidanhao
+        out_dict['优先级'] = self.youxianji.currentText()
+        out_dict['维修类型'] = self.weixiuleixing.currentText()
+        out_dict['负责人'] = self.mvp.text()
+        out_dict['机组'] = self.jizu.currentText()
+        out_dict['专业'] = self.zhuanye.currentText()
+        out_dict['电厂编码'] = self.bianma.text()
+        out_dict['工作内容'] = self.content.text()
+        out_dict['机组类别'] = self.jizuleibie.currentText()
+        out_dict['开始日期'] = QDate.toString(self.begindate.date(), 'yyyy/MM/dd')
+        out_dict['开始时间'] = QTime.toString(self.begintime.time(), 'hh:mm')
+        out_dict['结束日期'] = QDate.toString(self.enddate.date(), 'yyyy/MM/dd')
+        out_dict['结束时间'] = QTime.toString(self.endtime.time(), 'hh:mm')
+        out_dict['班组'] = self.banzu.currentText()
+        out_dict['工作票类型'] = self.gzpleixing.currentText()
+        out_dict['总人数'] = self.sum.text()
+        out_dict['班组成员'] = self.chengyuan.text()
+        out_dict['工作内容及地点'] = self.contentaddr.text()
+        out_dict['隔离类型'] = self.gelileixing.currentText()
+        out_dict['隔离状态'] = self.gelizhuangtai.currentText()
+        out_dict['安全标示'] = self.anquanbiaoshi.currentText()
+        out_dict['隔离措施'] = str_glcs
+        out_dict['预控措施'] = str_ykcs
+        return  out_dict
+
+        pass
     #点击开始按钮，开始自动办理工作票
     def start_autowork_clicked(self):
         try:
             str_glcs = self.get_glcs_data()
             str_ykcs = self.get_ykcs_data()
             AIMDICT = {}
-            AIMDICT['工单号'] = self.select_xuhao
-            AIMDICT['隔离单号'] = self.gelidanhao
-            AIMDICT['优先级'] = self.youxianji.currentText()
-            AIMDICT['维修类型'] = self.weixiuleixing.currentText()
-            AIMDICT['负责人'] = self.mvp.text()
-            AIMDICT['机组'] = self.jizu.currentText()
-            AIMDICT['专业'] = self.zhuanye.currentText()
-            AIMDICT['电厂编码'] = self.bianma.text()
-            AIMDICT['工作内容'] = self.content.text()
-            AIMDICT['机组类别'] = self.jizuleibie.currentText()
-            AIMDICT['开始日期'] = QDate.toString(self.begindate.date(), 'yyyy/MM/dd')
-            AIMDICT['开始时间'] = QTime.toString(self.begintime.time(), 'hh:mm')
-            AIMDICT['结束日期'] = QDate.toString(self.enddate.date(), 'yyyy/MM/dd')
-            AIMDICT['结束时间'] = QTime.toString(self.endtime.time(), 'hh:mm')
-            AIMDICT['班组'] = self.banzu.currentText()
-            AIMDICT['工作票类型'] = self.gzpleixing.currentText()
-            AIMDICT['总人数'] = self.sum.text()
-            AIMDICT['班组成员'] = self.chengyuan.text()
-            AIMDICT['工作内容及地点'] = self.contentaddr.text()
-            AIMDICT['隔离类型'] = self.gelileixing.currentText()
-            AIMDICT['隔离状态'] = self.gelizhuangtai.currentText()
-            AIMDICT['安全标识'] = self.anquanbiaoshi.currentText()
-            AIMDICT['隔离措施'] = str_glcs
-            AIMDICT['危险预控'] = str_ykcs
+            self.info_to_dict(AIMDICT)
+            # AIMDICT['工单号'] = self.select_xuhao
+            # AIMDICT['隔离单号'] = self.gelidanhao
+            # AIMDICT['优先级'] = self.youxianji.currentText()
+            # AIMDICT['维修类型'] = self.weixiuleixing.currentText()
+            # AIMDICT['负责人'] = self.mvp.text()
+            # AIMDICT['机组'] = self.jizu.currentText()
+            # AIMDICT['专业'] = self.zhuanye.currentText()
+            # AIMDICT['电厂编码'] = self.bianma.text()
+            # AIMDICT['工作内容'] = self.content.text()
+            # AIMDICT['机组类别'] = self.jizuleibie.currentText()
+            # AIMDICT['开始日期'] = QDate.toString(self.begindate.date(), 'yyyy/MM/dd')
+            # AIMDICT['开始时间'] = QTime.toString(self.begintime.time(), 'hh:mm')
+            # AIMDICT['结束日期'] = QDate.toString(self.enddate.date(), 'yyyy/MM/dd')
+            # AIMDICT['结束时间'] = QTime.toString(self.endtime.time(), 'hh:mm')
+            # AIMDICT['班组'] = self.banzu.currentText()
+            # AIMDICT['工作票类型'] = self.gzpleixing.currentText()
+            # AIMDICT['总人数'] = self.sum.text()
+            # AIMDICT['班组成员'] = self.chengyuan.text()
+            # AIMDICT['工作内容及地点'] = self.contentaddr.text()
+            # AIMDICT['隔离类型'] = self.gelileixing.currentText()
+            # AIMDICT['隔离状态'] = self.gelizhuangtai.currentText()
+            # AIMDICT['安全标识'] = self.anquanbiaoshi.currentText()
+            # AIMDICT['隔离措施'] = str_glcs
+            # AIMDICT['危险预控'] = str_ykcs
 
             if AIMDICT['优先级'] == '无': self.display.text('优先级==NULL') ; return
             if AIMDICT['维修类型'] == '无': self.display.text('维修类型==NULL') ; return
@@ -604,6 +669,7 @@ class Window(QWidget, Ui_Form):
             if AIMDICT['维修类型'] != '定期工作' and AIMDICT['工作票类型'] == '无': self.display.text('工作票类型==NULL') ; return
 
             # print(AIMDICT)
+            # return
             self.start_btn.setEnabled(False)
             # -----------------TEST--------------------
 
@@ -742,6 +808,18 @@ class Window(QWidget, Ui_Form):
             str_ykcs = str_ykcs + strtemp[1:] + '\r\n'
         return str_ykcs
 
+
+    def clear_info(self):
+        self.mvp.setText('')
+        self.bianma.setText('')
+        self.chengyuan.setText('')
+        self.sum.setText('')
+        self.glcs_table.clear()
+        self.glcs_table.setRowCount(0)
+        self.glcs_table.setColumnCount(0)
+        self.ykcs_table.clear()
+        self.ykcs_table.setRowCount(0)
+        self.ykcs_table.setColumnCount(0)
 
 
 

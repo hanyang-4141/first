@@ -1,0 +1,1280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1019</width>
+    <height>865</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_12">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_29">
+     <item>
+      <widget class="QFrame" name="frame">
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_28">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_27">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetMinAndMaxSize</enum>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_20">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_19">
+              <item>
+               <widget class="QLabel" name="label_8">
+                <property name="text">
+                 <string>年份：</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="year_combo">
+                <item>
+                 <property name="text">
+                  <string>模板</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="filter_text">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="placeholderText">
+               <string>输入关键字搜索</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="search_btn">
+              <property name="text">
+               <string>搜索</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBox">
+            <property name="text">
+             <string>定期工作</string>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QFrame" name="frame_2">
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_24">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_22">
+          <item>
+           <widget class="QLabel" name="label_21">
+            <property name="text">
+             <string>负责人：</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="fuzeren">
+            <item>
+             <property name="text">
+              <string>周军</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>胡毅</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>王志英</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>梁春红</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>云雯</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>车璐</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>范舒婷</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="denglu">
+            <property name="text">
+             <string>登录</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_23">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_26">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetMinimumSize</enum>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QLineEdit" name="lineEdit">
+         <property name="inputMask">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>输入工单号</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_2">
+         <item>
+          <property name="text">
+           <string>2020</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>2019</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>2018</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="find_btn">
+         <property name="text">
+          <string>查询</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QPushButton" name="start_btn">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>开始</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="display">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>2</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 248, 170);</string>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QProgressBar" name="progressBar">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>1</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="value">
+        <number>0</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="del_btn">
+       <property name="text">
+        <string>删除</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="save_btn">
+       <property name="text">
+        <string>保存</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="main_table">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_35">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <property name="leftMargin">
+            <number>11</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>优先级：</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QComboBox" name="youxianji">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>2</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <item>
+            <property name="text">
+             <string>立刻</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>24小时内处理</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>48小时内处理</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>72小时内处理</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>168小时内处理</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>停机处理</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>无</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>维修类型：</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="weixiuleixing">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>2</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <item>
+            <property name="text">
+             <string>定期工作</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>改进性检修</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>故障检修</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>状态检修</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>无</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>开始时间：</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDateEdit" name="begindate">
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(252, 228, 189);</string>
+           </property>
+           <property name="maximumDateTime">
+            <datetime>
+             <hour>23</hour>
+             <minute>59</minute>
+             <second>59</second>
+             <year>2025</year>
+             <month>12</month>
+             <day>31</day>
+            </datetime>
+           </property>
+           <property name="minimumDateTime">
+            <datetime>
+             <hour>0</hour>
+             <minute>0</minute>
+             <second>0</second>
+             <year>2010</year>
+             <month>12</month>
+             <day>31</day>
+            </datetime>
+           </property>
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTimeEdit" name="begintime">
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(252, 228, 189);</string>
+           </property>
+           <property name="calendarPopup">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>结束时间：</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDateEdit" name="enddate">
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(252, 228, 189);</string>
+           </property>
+           <property name="maximumDateTime">
+            <datetime>
+             <hour>23</hour>
+             <minute>59</minute>
+             <second>59</second>
+             <year>2025</year>
+             <month>12</month>
+             <day>31</day>
+            </datetime>
+           </property>
+           <property name="minimumDateTime">
+            <datetime>
+             <hour>0</hour>
+             <minute>0</minute>
+             <second>0</second>
+             <year>2010</year>
+             <month>12</month>
+             <day>31</day>
+            </datetime>
+           </property>
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTimeEdit" name="endtime">
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(252, 228, 189);</string>
+           </property>
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+           <property name="time">
+            <time>
+             <hour>18</hour>
+             <minute>0</minute>
+             <second>0</second>
+            </time>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_9">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_21">
+           <property name="leftMargin">
+            <number>24</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_6">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>专业：</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QComboBox" name="zhuanye">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>2</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <item>
+            <property name="text">
+             <string>汽机专业</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>锅炉专业</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>电气专业</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>热控专业</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>无</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_12">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_31">
+           <property name="leftMargin">
+            <number>24</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_12">
+             <property name="text">
+              <string>班组：</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QComboBox" name="banzu">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>2</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <item>
+            <property name="text">
+             <string>热控计算机</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>热控程控班</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>热控自动一</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>热控自动二</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>无</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_17">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_30">
+           <property name="leftMargin">
+            <number>12</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>负责人：</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="mvp">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="label_15">
+           <property name="text">
+            <string>班组成员：</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="chengyuan">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_8">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="label_7">
+           <property name="text">
+            <string>机组类别：</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="jizuleibie">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>2</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <item>
+            <property name="text">
+             <string>内蒙古丰泰发电厂</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>呼和浩特科林热电厂</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>科林城发热力</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>无</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <property name="leftMargin">
+            <number>24</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>机组：</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QComboBox" name="jizu">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>2</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <item>
+            <property name="text">
+             <string>丰泰#1机组</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>丰泰#2机组</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>丰泰公用</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>科林新#3机组</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>科林新#4机组</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>科林公用</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>无</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_16">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_32">
+           <property name="leftMargin">
+            <number>24</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>编码：</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="bianma">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="dragEnabled">
+            <bool>false</bool>
+           </property>
+           <property name="readOnly">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_10">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <property name="leftMargin">
+            <number>24</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_14">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>4</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>人数：</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="sum">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_11">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_9">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <widget class="QLabel" name="label_9">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>1</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>工作票类型：</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="gzpleixing">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>2</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <item>
+              <property name="text">
+               <string>热力机械工作票</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>热力机械外包工作票</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>电气工作票</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>无</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_13">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <property name="leftMargin">
+              <number>12</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_18">
+               <property name="text">
+                <string>隔离类型：</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QComboBox" name="gelileixing">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>2</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <item>
+              <property name="text">
+               <string>电气隔离</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>机械隔离</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>电气及机械隔离</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>无</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_10">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_14">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_33">
+             <property name="leftMargin">
+              <number>12</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_19">
+               <property name="text">
+                <string>隔离状态：</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QComboBox" name="gelizhuangtai">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>2</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <item>
+              <property name="text">
+               <string>备用</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>不停电</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>断开</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>关</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>关闭、停电</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>合上</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>解除自动</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>开</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>停电</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>停运</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>停运断电</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>退出保护</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>退出监视</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>退出连锁</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>无</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_15">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_34">
+             <property name="leftMargin">
+              <number>12</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_20">
+               <property name="text">
+                <string>安全标识：</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QComboBox" name="anquanbiaoshi">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>2</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <item>
+              <property name="text">
+               <string>禁止操作，有人工作</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>禁止合闸，有人工作</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>禁止攀登</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>由此上下</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>在此工作</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>止步，高压危险</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>无</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_11">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="leftMargin">
+        <number>11</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label_16">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="lineWidth">
+          <number>1</number>
+         </property>
+         <property name="text">
+          <string>工作内容：</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="content">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(252, 228, 189);</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_18">
+     <item>
+      <widget class="QLabel" name="label_17">
+       <property name="text">
+        <string>内容及地点：</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="contentaddr">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(252, 228, 189);</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="glcs_table"/>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_25">
+     <item>
+      <widget class="QPushButton" name="btn_glcs_addrow">
+       <property name="text">
+        <string>增加</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_glcs_delrow">
+       <property name="text">
+        <string>删除</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="text_find"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_13">
+       <property name="text">
+        <string>-----&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="text_replace"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_replace">
+       <property name="text">
+        <string>替换</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="ykcs_table">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>1</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

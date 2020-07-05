@@ -631,7 +631,7 @@ class Ui_Form(object):
         self.youxianji.setItemText(6, _translate("Form", "无"))
         self.label_2.setText(_translate("Form", "维修类型："))
         self.weixiuleixing.setItemText(0, _translate("Form", "定期工作"))
-        self.weixiuleixing.setItemText(1, _translate("Form", "改进型检修"))
+        self.weixiuleixing.setItemText(1, _translate("Form", "改进性检修"))
         self.weixiuleixing.setItemText(2, _translate("Form", "故障检修"))
         self.weixiuleixing.setItemText(3, _translate("Form", "状态检修"))
         self.weixiuleixing.setItemText(4, _translate("Form", "无"))
