@@ -218,7 +218,7 @@ GZP = {
         '措施表格': "//*[@data-ig='x:1317417514.18:mkr:rows:nw:1']",
 
     },
-    '危险预控': {
+    '预控措施': {
         'TAB_btn': "//td[@tabid='MC_TC,6']",
         '危险辨识': "//*[@id='MC_TC__ctl6_ctl00__371']",
         '预控措施': "//*[@id='MC_TC__ctl6_ctl00__5002']",
@@ -654,9 +654,9 @@ class Window(QWidget, Ui_Form):
             # AIMDICT['工作内容及地点'] = self.contentaddr.text()
             # AIMDICT['隔离类型'] = self.gelileixing.currentText()
             # AIMDICT['隔离状态'] = self.gelizhuangtai.currentText()
-            # AIMDICT['安全标识'] = self.anquanbiaoshi.currentText()
+            # AIMDICT['安全标示'] = self.anquanbiaoshi.currentText()
             # AIMDICT['隔离措施'] = str_glcs
-            # AIMDICT['危险预控'] = str_ykcs
+            # AIMDICT['预控措施'] = str_ykcs
 
             if AIMDICT['优先级'] == '无': self.display.text('优先级==NULL') ; return
             if AIMDICT['维修类型'] == '无': self.display.text('维修类型==NULL') ; return
@@ -881,9 +881,9 @@ class Auto_Write_Thread(QtCore.QThread):
             self._auto_write_sign.emit(2, '写数据-->隔离措施')
             self.bfs.write_page_text('GLCS', self.aim_dict)
             time.sleep(2)
-            self._auto_write_sign.emit(2, '切换选项-->危险预控')
-            self.bfs.btn_op('危险预控')
-            self._auto_write_sign.emit(2, '写数据-->危险预控')
+            self._auto_write_sign.emit(2, '切换选项-->预控措施')
+            self.bfs.btn_op('预控措施')
+            self._auto_write_sign.emit(2, '写数据-->预控措施')
             self.bfs.write_page_text('YKCS', self.aim_dict)
             self._auto_write_sign.emit(2, '操作完成！')
         except Exception as e:
@@ -992,11 +992,11 @@ class Search_Gd_Thread(QtCore.QThread):
             self._search_str_sign.emit(2, '查询-->隔离措施数据')
             self._search_str_sign.emit(1, '80')
             self.bfs.get_page_text('GLCS', mydict)
-            self._search_str_sign.emit(2, '切换选项-->危险预控')
+            self._search_str_sign.emit(2, '切换选项-->预控措施')
             self._search_str_sign.emit(1, '85')
-            self.bfs.btn_op('危险预控')
-            print('危险预控', end='->', flush=True)
-            self._search_str_sign.emit(2, '查询-->危险预控数据')
+            self.bfs.btn_op('预控措施')
+            print('预控措施', end='->', flush=True)
+            self._search_str_sign.emit(2, '查询-->预控措施数据')
             self._search_str_sign.emit(1, '90')
             self.bfs.get_page_text('WXYK', mydict)
             self.bfs.MyDriver.close()
@@ -1294,7 +1294,7 @@ class AutoOperator:
             tempstr = str(aim_dict['隔离措施'])
             glcs_list = tempstr.splitlines()
             print(glcs_list)
-            print(aim_dict['安全标识'])
+            print(aim_dict['安全标示'])
             for index, glcs in enumerate(glcs_list):
                 str1 = glcs.split('$')
                 if str1[0].strip() == '热机票-2' or str1[0].strip() == '' :
@@ -1312,9 +1312,9 @@ class AutoOperator:
                     if aim_dict['隔离状态'] != '无':
                         self.combo_op(GZP['隔离措施']['隔离状态']['combo_btn'], 1)
                         self.combo_op(GZP['隔离措施']['隔离状态'][aim_dict['隔离状态']], 2)
-                    if aim_dict['安全标识'] != '无':
+                    if aim_dict['安全标示'] != '无':
                         self.combo_op(GZP['隔离措施']['安全标示']['combo_btn'], 1)
-                        self.combo_op(GZP['隔离措施']['安全标示'][aim_dict['安全标识']], 2)
+                        self.combo_op(GZP['隔离措施']['安全标示'][aim_dict['安全标示']], 2)
                     self.btn_op('save')
                     time.sleep(3)
                 else:
@@ -1328,13 +1328,13 @@ class AutoOperator:
                     time.sleep(2)
             pass
         elif pagetype == 'YKCS':
-            tempstr = str(aim_dict['危险预控'])
+            tempstr = str(aim_dict['预控措施'])
             ykcs_list = tempstr.splitlines()
             print(ykcs_list)
             for index, glcs in enumerate(ykcs_list):
                 str1 = glcs.split('$')
-                self.input_op(GZP['危险预控']['危险辨识'], str1[0])
-                self.input_op(GZP['危险预控']['预控措施'], str1[1])
+                self.input_op(GZP['预控措施']['危险辨识'], str1[0])
+                self.input_op(GZP['预控措施']['预控措施'], str1[1])
                 self.btn_op('save')
                 time.sleep(2)
 
@@ -1351,7 +1351,7 @@ class AutoOperator:
         elif operator == '工作票':         btn_click(GZP['工作票']['TAB_btn'])
         elif operator == '电厂编码':        btn_click(GZP['电厂编码']['TAB_btn'])
         elif operator == '隔离措施':        btn_click(GZP['隔离措施']['TAB_btn'])
-        elif operator == '危险预控':        btn_click(GZP['危险预控']['TAB_btn'])
+        elif operator == '预控措施':        btn_click(GZP['预控措施']['TAB_btn'])
         elif operator == 'search':         btn_click(BTN_Search)
         elif operator == 'save':           btn_click(BTN_Save)
         elif operator == 'new':            btn_click(BTN_New)
