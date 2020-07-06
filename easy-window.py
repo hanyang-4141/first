@@ -520,34 +520,35 @@ class Window(QWidget, Ui_Form):
 
     #插入数据到主TABLE
     def insert_data(self, current_df):
-        self.xuhao_last = current_df.tail(1)['序号'].values[0]
-        print('最后序号为{}'.format(self.xuhao_last))
-        dingqi, weixiu = self.filter_dateframe(current_df, type='dingqi-fenli')
-        if self.checkBox.isChecked():
-            temp_df = dingqi
-        else:
-            temp_df = weixiu
-        selected_df = temp_df[['序号', '工单号', '负责人', '机组', '工作内容', '维修类型', '隔离单号']]
-        # print(selected_df)
-        rows = selected_df.shape[0]
-        columns = selected_df.shape[1]
-        headers = selected_df.columns.values.tolist()
-        self.main_table.clear()
-        self.main_table.setRowCount(rows)
-        self.main_table.setColumnCount(columns)
-        self.main_table.setHorizontalHeaderLabels(headers)
-        self.main_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
-        self.main_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeToContents)
-        self.main_table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeToContents)
-        self.main_table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeToContents)
-        self.main_table.horizontalHeader().setSectionResizeMode(4, QHeaderView.Stretch)
-        self.main_table.horizontalHeader().setSectionResizeMode(5, QHeaderView.ResizeToContents)
-        for i in range(rows):
-            for j in range(columns):
-                newitem = QTableWidgetItem(str(selected_df.iat[i, j]))
-                # if j == 1:
-                #     newitem = QTableWidgetItem(str(selected_df.iat[i, j]).split('.')[0])
-                self.main_table.setItem(i, j, newitem)
+        try:
+            self.xuhao_last = current_df.tail(1)['序号'].values[0]
+            print('最后序号为{}'.format(self.xuhao_last))
+            dingqi, weixiu = self.filter_dateframe(current_df, type='dingqi-fenli')
+            if self.checkBox.isChecked():
+                temp_df = dingqi
+            else:
+                temp_df = weixiu
+            selected_df = temp_df[['序号',  '负责人', '机组', '工作内容', '维修类型',]]
+            # print(selected_df)
+            rows = selected_df.shape[0]
+            columns = selected_df.shape[1]
+            headers = selected_df.columns.values.tolist()
+            self.main_table.clear()
+            self.main_table.setRowCount(rows)
+            self.main_table.setColumnCount(columns)
+            self.main_table.setHorizontalHeaderLabels(headers)
+            self.main_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
+            self.main_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeToContents)
+            self.main_table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeToContents)
+            # self.main_table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeToContents)
+            self.main_table.horizontalHeader().setSectionResizeMode(3, QHeaderView.Stretch)
+            self.main_table.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeToContents)
+            for i in range(rows):
+                for j in range(columns):
+                    newitem = QTableWidgetItem(str(selected_df.iat[i, j]))
+                    self.main_table.setItem(i, j, newitem)
+        except Exception as e:
+            print(e)
 
 
 
@@ -657,6 +658,8 @@ class Window(QWidget, Ui_Form):
             # AIMDICT['安全标示'] = self.anquanbiaoshi.currentText()
             # AIMDICT['隔离措施'] = str_glcs
             # AIMDICT['预控措施'] = str_ykcs
+            # print(AIMDICT)
+            # return
 
             if AIMDICT['优先级'] == '无': self.display.text('优先级==NULL') ; return
             if AIMDICT['维修类型'] == '无': self.display.text('维修类型==NULL') ; return
