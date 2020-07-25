@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1019</width>
-    <height>865</height>
+    <height>882</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -1230,14 +1230,14 @@
      <item>
       <widget class="QPushButton" name="btn_glcs_addrow">
        <property name="text">
-        <string>增加</string>
+        <string>增加隔离措施</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="btn_glcs_delrow">
        <property name="text">
-        <string>删除</string>
+        <string>删除隔离措施</string>
        </property>
       </widget>
      </item>
@@ -1257,7 +1257,7 @@
      <item>
       <widget class="QPushButton" name="btn_replace">
        <property name="text">
-        <string>替换</string>
+        <string>隔离措施及工作内容字符替换</string>
        </property>
       </widget>
      </item>
@@ -1272,6 +1272,24 @@
       </sizepolicy>
      </property>
     </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_36">
+     <item>
+      <widget class="QPushButton" name="btn_ykcs_addrow">
+       <property name="text">
+        <string>增加预控措施</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_ykcs_delrow">
+       <property name="text">
+        <string>删除预控措施</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
