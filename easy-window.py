@@ -12,6 +12,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.chrome.options import Options
 from ui_easy1 import *
 from mydict import GD, GZP, EMPLOYEE_INFO
 
@@ -27,7 +28,7 @@ LOGIN = '//*[@name="btnLogin"]'
 FILEPATH = r'data\easy.xlsx'
 PATH = r"d:\app\chromedriver.exe"
 AIMDICT = {}
-OPERATE_PAGE = ''
+# OPERATE_PAGE = ''
 
 
 class Window(QWidget, Ui_Form):
@@ -113,6 +114,19 @@ class Window(QWidget, Ui_Form):
         self.ykcs_table.itemDoubleClicked.connect(self.edit_state)
         #========编辑状态判断============编辑状态判断===============编辑状态判断===========编辑状态判断====================
 
+        self.ceshi.clicked.connect(self.test111)
+    def test111(self):
+        self.Auto = AutoOperator(self)
+        print('test')
+        self.Auto.test_login()
+        print(self.Auto)
+        AIMDICT = {}
+        self.get_widget_info(AIMDICT)
+
+        self.Auto.write_page_text('GLCS', AIMDICT)
+        print('123')
+        pass
+
     def callback_auto_write(self,index,msg):
         if index == 1:
             pass
@@ -134,7 +148,7 @@ class Window(QWidget, Ui_Form):
             mylist.append(dict)
             df = pd.DataFrame(mylist)
             df['序号'] = self.xuhao_last + 1   #new add  xuhao
-            # self.current_dataframe = df
+            self.current_dataframe = df
             self.insert_data(df)
 
     def callback_search(self,index,msg):
@@ -160,6 +174,8 @@ class Window(QWidget, Ui_Form):
 
     def login(self):
         self.Auto=AutoOperator(self)
+
+        # self.Auto.login('123')
         tempstr = self.fuzeren.currentText()
         self.display.setText('正在登录...')
         self.thread1 = Login_Thread(self.Auto,EMPLOYEE_INFO[tempstr])
@@ -940,6 +956,14 @@ class Search_Gd_Thread(QtCore.QThread):
 class AutoOperator:
     def __init__(self, isintance):
         self.win = isintance
+        self.OPERATE_PAGE = ''
+
+    def test_login(self):
+        PATH1 = r'c:\chromedriver.exe'
+        chrome_options = Options()
+        chrome_options.add_experimental_option('debuggerAddress', '127.0.0.1:9222')
+        self.MyDriver = webdriver.Chrome(executable_path=PATH1, chrome_options=chrome_options)
+        return True
 
     def login(self,employee_info_list):
         #----------------huifu-------------------
@@ -993,28 +1017,28 @@ class AutoOperator:
 
 
     def combobox_operation(self, combo, operation):
-        if OPERATE_PAGE == "GD工单":
+        if self.OPERATE_PAGE == "GD工单":
             combo_xpath = GD['工单'][combo]['combo_btn']
             combolist_xpath = GD['工单'][combo][operation]
-        elif OPERATE_PAGE == "GD工单分项":
+        elif self.OPERATE_PAGE == "GD工单分项":
             combo_xpath = GD['工单分项'][combo]['combo_btn']
             combolist_xpath = GD['工单分项'][combo][operation]
-        elif OPERATE_PAGE == "GD连接":
+        elif self.OPERATE_PAGE == "GD连接":
             pass
-        elif OPERATE_PAGE == "GZP工作票":
+        elif self.OPERATE_PAGE == "GZP工作票":
             combo_xpath = GZP['工作票'][combo]['combo_btn']
             combolist_xpath = GZP['工作票'][combo][operation]
-        elif OPERATE_PAGE == "GZP电厂编码":
+        elif self.OPERATE_PAGE == "GZP电厂编码":
             combo_xpath = GZP['电厂编码'][combo]['combo_btn']
             combolist_xpath = GZP['电厂编码'][combo][operation]
-        elif OPERATE_PAGE == "GZP隔离措施":
+        elif self.OPERATE_PAGE == "GZP隔离措施":
             combo_xpath = GZP['隔离措施'][combo]['combo_btn']
             combolist_xpath = GZP['隔离措施'][combo][operation]
-        elif OPERATE_PAGE == "GZP预控措施":
+        elif self.OPERATE_PAGE == "GZP预控措施":
             combo_xpath = GZP['预控措施'][combo]['combo_btn']
             combolist_xpath = GZP['预控措施'][combo][operation]
         else:
-            print('OPERATE_PAGE没有找到！')
+            print('self.OPERATE_PAGE没有找到！')
             return
         count = 0
         while count < 5:
@@ -1035,22 +1059,22 @@ class AutoOperator:
                 break
 
     def input_operation(self, input, content):
-        if OPERATE_PAGE == "GD工单":
+        if self.OPERATE_PAGE == "GD工单":
             input_xpath = GD['工单'][input]['input_adr']
-        elif OPERATE_PAGE == "GD工单分项":
+        elif self.OPERATE_PAGE == "GD工单分项":
             input_xpath = GD['工单分项'][input]['input_adr']
-        elif OPERATE_PAGE == "GD连接":
+        elif self.OPERATE_PAGE == "GD连接":
             pass
-        elif OPERATE_PAGE == "GZP工作票":
+        elif self.OPERATE_PAGE == "GZP工作票":
             input_xpath = GZP['工作票'][input]['input_adr']
-        elif OPERATE_PAGE == "GZP电厂编码":
+        elif self.OPERATE_PAGE == "GZP电厂编码":
             input_xpath = GZP['电厂编码'][input]['input_adr']
-        elif OPERATE_PAGE == "GZP隔离措施":
+        elif self.OPERATE_PAGE == "GZP隔离措施":
             input_xpath = GZP['隔离措施'][input]['input_adr']
-        elif OPERATE_PAGE == "GZP预控措施":
+        elif self.OPERATE_PAGE == "GZP预控措施":
             input_xpath = GZP['预控措施'][input]['input_adr']
         else:
-            print('OPERATE_PAGE没有找到！')
+            print('self.OPERATE_PAGE没有找到！')
             return
 
         count = 0
@@ -1189,7 +1213,9 @@ class AutoOperator:
                 time.sleep(1)
 
         if pagetype == 'GD':
-            OPERATE_PAGE = 'GD工单'
+            self.OPERATE_PAGE = 'GD工单'
+
+            print(self.OPERATE_PAGE)
             self.combobox_operation('优先级', aim_dict['优先级']);      print('优先级..........已写入')
             self.combobox_operation('维修类型', aim_dict['维修类型']);  print('维修类型..........已写入')
             self.combobox_operation('机组', aim_dict['机组']);           print('机组..........已写入')
@@ -1216,7 +1242,7 @@ class AutoOperator:
             save_plus(tic)
 
         elif pagetype == 'GDFX':
-            OPERATE_PAGE = 'GD工单分项'
+            self.OPERATE_PAGE = 'GD工单分项'
             self.btn_op('分项表格')
             time.sleep(5)
             self.input_operation('班组', aim_dict['班组']);         print('班组..........已写入')
@@ -1225,19 +1251,20 @@ class AutoOperator:
             save_plus(tic)
 
         elif pagetype == 'LJ':
-            OPERATE_PAGE = 'GD连接'
+            self.OPERATE_PAGE = 'GD连接'
             self.btn_op('选中工作票')
             time.sleep(1)
             self.btn_op('右键工作票')
             time.sleep(1)
             self.btn_op('创建工作票')
+            print('创建工作票')
             time.sleep(3)
             self.btn_op('选中工作票')
             time.sleep(1)
             self.btn_op('右键工作票')
             time.sleep(1)
             self.btn_op('打开工作票')
-
+            print('打开工作票')
             # exist = EC.new_window_is_opened(self.MyDriver.window_handles)
             # WebDriverWait(self.MyDriver, 20).until(exist)
             time.sleep(5)
@@ -1245,7 +1272,7 @@ class AutoOperator:
 
             pass
         elif pagetype == 'GZP':
-            OPERATE_PAGE = 'GZP工作票'
+            self.OPERATE_PAGE = 'GZP工作票'
 
             self.combobox_operation('工作票类型', aim_dict['工作票类型']);   print('工作票类型..........已写入')
             self.combobox_operation('专业', aim_dict['专业']);                print('专业..........已写入')
@@ -1259,7 +1286,7 @@ class AutoOperator:
             save_plus(tic = time.time())
 
         elif pagetype == 'DCBM':
-            OPERATE_PAGE = 'GZP电厂编码'
+            self.OPERATE_PAGE = 'GZP电厂编码'
             self.btn_op('编码表格')
             if aim_dict.get('隔离类型') == '' or aim_dict.get('隔离类型') == 'nan':
                 return
@@ -1270,12 +1297,13 @@ class AutoOperator:
             save_plus(tic = time.time())
 
         elif pagetype == 'GLCS':
-            OPERATE_PAGE = 'GZP隔离措施'
+            self.OPERATE_PAGE = 'GZP隔离措施'
             tempstr = str(aim_dict['隔离措施'])
             glcs_list = tempstr.splitlines()
             len1 = len(glcs_list)
             for index, glcs in enumerate(glcs_list):
                 str1 = glcs.split('$')
+                print(str1)
                 if str1[0].strip() == '热机票-2' or str1[0].strip() == '' :
                     break
                 print("隔离措施一共{}条，正在写入第{}条！".format(len1, index + 1))
@@ -1283,9 +1311,11 @@ class AutoOperator:
 
                     self.combobox_operation('隔离切换操作', '隔离切换操作')
                     self.combobox_operation('措施类别', '热机票-1')
+                    print(GZP['隔离措施']['措施内容']['input_adr'])
                     self.input_operation('措施内容', str1[2])
+                    print(str1[2])
                     self.input_operation('电厂编码', aim_dict['电厂编码'])
-                    qq = self.MyDriver.find_element(By.XPATH, GZP['隔离措施']['措施内容'])
+                    qq = self.MyDriver.find_element(By.XPATH, GZP['隔离措施']['措施内容']['input_adr'])
                     qq.click()
                     time.sleep(2)
                     if aim_dict['隔离状态'] != '无':
@@ -1305,7 +1335,7 @@ class AutoOperator:
                     time.sleep(2)
             pass
         elif pagetype == 'YKCS':
-            OPERATE_PAGE = 'GZP预控措施'
+            self.OPERATE_PAGE = 'GZP预控措施'
             tempstr = str(aim_dict['预控措施'])
             ykcs_list = tempstr.splitlines()
             len2 = len(ykcs_list)

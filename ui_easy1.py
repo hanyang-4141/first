@@ -599,6 +599,9 @@ class Ui_Form(object):
         self.btn_ykcs_delrow = QtWidgets.QPushButton(Form)
         self.btn_ykcs_delrow.setObjectName("btn_ykcs_delrow")
         self.horizontalLayout_36.addWidget(self.btn_ykcs_delrow)
+        self.ceshi = QtWidgets.QPushButton(Form)
+        self.ceshi.setObjectName("ceshi")
+        self.horizontalLayout_36.addWidget(self.ceshi)
         self.verticalLayout_12.addLayout(self.horizontalLayout_36)
 
         self.retranslateUi(Form)
@@ -717,3 +720,4 @@ class Ui_Form(object):
         self.btn_replace.setText(_translate("Form", "隔离措施及工作内容字符替换"))
         self.btn_ykcs_addrow.setText(_translate("Form", "增加预控措施"))
         self.btn_ykcs_delrow.setText(_translate("Form", "删除预控措施"))
+        self.ceshi.setText(_translate("Form", "测试"))
